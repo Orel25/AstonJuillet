@@ -1,0 +1,29 @@
+name: Phrase Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  phrase:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        fruit: [pomme, banane, orange, fraise]
+        name: [Michel, Jean, Sophie]
+    steps:
+      - name: Display Phrase
+        run: echo "${{ matrix.name }} mange une ${{ matrix.fruit }}, et il adore ça !"
+
+  check:
+    needs: phrase
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Result
+        run: echo "Vérification des résultats..."
+
+  final:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Final Step
+        run: echo "Pipeline terminée"

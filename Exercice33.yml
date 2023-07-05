@@ -1,0 +1,16 @@
+name: Second Workflow
+on:
+  workflow_run:
+    workflows: ["NomDuWorkflowPrecedent"]
+    types:
+      - completed
+
+jobs:
+  display-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display Message
+        uses: actions/github-script@v4
+        with:
+          script: |
+            console.log('Le workflow précédent est terminé. Message supplémentaire.');

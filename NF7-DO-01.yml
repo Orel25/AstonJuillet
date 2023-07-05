@@ -1,0 +1,19 @@
+name: Main Branch Protection
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  branch-protection:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enable branch protection
+        uses: repo-sync/pull-request@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          protection: true
+          dismiss_stale_reviews: true
+          require_code_owner_reviews: true

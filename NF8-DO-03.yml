@@ -1,0 +1,21 @@
+name: Branch Creation Pipeline
+
+on:
+  issues:
+    types:
+      - assigned
+
+jobs:
+  create-branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create branch from develop
+        run: |
+          git checkout develop
+          git pull origin develop
+          git checkout -b branch-name # Remplacez branch-name par le nom souhaité pour la branche
+          git push origin branch-name # Remplacez branch-name par le nom souhaité pour la branche

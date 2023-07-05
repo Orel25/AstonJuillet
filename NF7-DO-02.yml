@@ -1,0 +1,19 @@
+name: Develop Branch Protection
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  branch-protection:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enable branch protection
+        uses: repo-sync/pull-request@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: develop
+          protection: true
+          dismiss_stale_reviews: true
+          require_code_owner_reviews: true

@@ -1,0 +1,20 @@
+name: PR Workflow
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  display-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if PR is merged
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            if (pr.merged) {
+              console.log('La PR a été fusionnée.');
+            } else {
+              console.log('La PR a été fermée sans être fusionnée.');
+            }

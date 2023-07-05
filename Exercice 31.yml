@@ -1,0 +1,11 @@
+name: Issue Workflow
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  send-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Message
+         run : echo "issus cree"

@@ -1,0 +1,20 @@
+name: Branch Deletion Pipeline
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  delete-branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Delete merged feature branches
+        run: |
+          git fetch origin --prune
+          git branch --merged develop | grep "feature/" | xargs -r git branch -d
+          git push origin --delete $(git branch --merged develop | grep "feature/" | sed 's/origin\///')

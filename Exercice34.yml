@@ -1,0 +1,18 @@
+name: Double Job Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display Message
+        run: echo "Job 1: Message affiché après le déclenchement manuel"
+
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1
+    steps:
+      - name: Display Message
+        run: echo "Job 2: Message affiché après l'exécution de Job 1"
